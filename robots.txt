@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://aidebudgetjeune.pages.dev/sitemap.xml
+Sitemap: https://aidebudgetjeune.lolivieri43.workers.dev/sitemap.xml
