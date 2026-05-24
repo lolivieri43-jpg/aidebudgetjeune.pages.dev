@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Budget étudiant à Auxerre : simulateur gratuit et estimation simple</title>
+<meta name="description" content="Calcule un budget étudiant ou apprenti à Auxerre : loyer, APL, bourse, transport, alimentation et reste à vivre. Simulation gratuite.">
+<meta name="robots" content="index, follow"><link rel="canonical" href="https://aidebudgetjeunes-pages-dev.pages.dev/villes/budget-etudiant-auxerre.html">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body data-city="Auxerre">
+<div class="topbar"><div class="wrap nav"><a class="brand" href="../index.html">AideBudgetJeune</a><div class="navlinks"><a href="../index.html#simulateur">Simulateur</a><a href="../index.html#villes">Villes</a><a href="../index.html#seo">Référencement</a><a href="../index.html#contact">Contact</a></div></div></div>
+<main class="wrap section article">
+  <div class="breadcrumb"><a href="../index.html">Accueil</a> › <a href="../index.html#villes">Villes</a> › Auxerre</div>
+  <section class="card split">
+    <div>
+      <span class="badge" style="background:#eef6ff;color:#1e40af;border-color:#bfdbfe">Bourgogne-Franche-Comté · Ville moyenne</span>
+      <h1>Budget étudiant à Auxerre : combien prévoir par mois ?</h1>
+      <p>Cette page donne une base de calcul rapide pour un étudiant, un apprenti ou une famille qui prépare une installation à <strong>Auxerre</strong>. Les montants sont préremplis pour gagner du temps et restent modifiables.</p>
+      <div class="cta"><a class="btn dark" href="#simulateur">Simuler mon budget</a><a class="btn" href="../index.html#villes">Voir les autres villes</a></div>
+    </div>
+    <aside class="card" style="box-shadow:none;background:#f8fafc">
+      <h2>Base préremplie</h2>
+      <table class="table"><tr><th>Poste</th><th>Montant</th></tr><tr><td>Loyer</td><td>390 €</td></tr><tr><td>Alimentation</td><td>220 €</td></tr><tr><td>Transport</td><td>30 €</td></tr><tr><td>Autres frais</td><td>188 €</td></tr><tr><th>Total indicatif</th><th>828 €</th></tr></table>
+      <p class="note">Base indicative pour démarrer le calcul. À ajuster selon le logement réel.</p>
+    </aside>
+  </section>
+  <section class="section ad">Emplacement publicité — à remplacer par le bloc Google AdSense après validation du site</section>
+  
+<section id="simulateur" class="section card">
+  <h2>Simulateur de budget mensuel</h2>
+  <p class="muted">Les montants sont préremplis pour aller vite, mais tu peux tout modifier. C’est volontairement simple : pas besoin d’un cockpit d’Airbus pour savoir si le budget passe.</p>
+  <div class="calc">
+    <form class="formgrid" oninput="calculateBudget()">
+      <div><label for="profil">Profil</label><select id="profil"><option>Étudiant</option><option>Apprenti</option><option>Lycéen</option><option>Parent</option></select></div>
+      <div><label for="villeSelect">Ville</label><select id="villeSelect"></select></div>
+      <div><label for="loyer">Loyer mensuel</label><input id="loyer" type="number" min="0" value="400"></div>
+      <div><label for="alimentation">Alimentation</label><input id="alimentation" type="number" min="0" value="225"></div>
+      <div><label for="transport">Transport</label><input id="transport" type="number" min="0" value="30"></div>
+      <div><label for="telephone">Téléphone / internet</label><input id="telephone" type="number" min="0" value="20"></div>
+      <div><label for="assurance">Assurance / santé</label><input id="assurance" type="number" min="0" value="30"></div>
+      <div><label for="divers">Loisirs / frais divers</label><input id="divers" type="number" min="0" value="130"></div>
+      <div><label for="bourse">Bourse</label><input id="bourse" type="number" min="0" value="350"></div>
+      <div><label for="apl">APL estimée</label><input id="apl" type="number" min="0" value="150"></div>
+      <div><label for="salaire">Salaire / alternance</label><input id="salaire" type="number" min="0" value="0"></div>
+      <div><label for="famille">Aide familiale</label><input id="famille" type="number" min="0" value="100"></div>
+    </form>
+    <aside class="result" aria-live="polite">
+      <h3>Résultat</h3>
+      <div class="line"><span>Dépenses</span><strong><span id="totalDepenses">0</span> €</strong></div>
+      <div class="line"><span>Aides / revenus</span><strong><span id="totalAides">0</span> €</strong></div>
+      <p>Solde estimé :</p>
+      <div class="big" id="solde">0 €</div>
+      <p id="conclusion"></p>
+      <button class="btn dark small" type="button" id="copyBtn" onclick="copyBudgetText()">Copier le résultat</button>
+      <p class="note">Pour les droits exacts, utiliser les simulateurs officiels CAF / CROUS. Ici, on prépare le budget, on ne remplace pas l’administration.</p>
+    </aside>
+  </div>
+</section>
+
+  <section class="section card">
+    <h2>Comment lire le résultat pour Auxerre ?</h2>
+    <p>Le bon réflexe est de séparer les <strong>dépenses fixes</strong> et les <strong>aides ou revenus</strong>. Le loyer est souvent le poste le plus lourd. Ensuite viennent l’alimentation, les transports, l’assurance, le téléphone et les imprévus.</p>
+    <ul class="list-clean"><li>Si le solde est positif de plus de 150 €, le budget commence à être confortable.</li><li>Si le solde est positif mais faible, il faut surveiller les imprévus.</li><li>Si le solde est négatif, il faut revoir le loyer, les aides ou l’accompagnement familial.</li></ul>
+  </section>
+  <section class="section card">
+    <h2>Exemple de contenu SEO à enrichir</h2>
+    <p>Pour améliorer cette page, ajoute ensuite des informations locales : quartiers proches des écoles, transports, CROUS, CFA, lycées, campus, temps de trajet et bons plans locaux. Plus le contenu est utile, plus la page a une vraie chance de ranker. Le référencement, ce n’est pas de la magie noire : c’est surtout répondre mieux que les autres.</p>
+  </section>
+  <section class="section card faq">
+    <h2>FAQ budget étudiant à Auxerre</h2>
+    <details><summary><strong>Quel est le poste le plus important ?</strong></summary><p>Le logement. Avant de signer, compare le loyer avec les aides possibles et le budget disponible.</p></details>
+    <details><summary><strong>Cette estimation remplace-t-elle une demande CAF ?</strong></summary><p>Non. Elle sert uniquement à préparer le budget. Pour les droits exacts, il faut passer par les simulateurs officiels.</p></details>
+    <details><summary><strong>Cette page fonctionne aussi pour un apprenti ?</strong></summary><p>Oui. Sélectionne le profil apprenti dans le simulateur et indique le salaire mensuel.</p></details>
+  </section>
+</main>
+<footer class="footer"><div class="wrap footgrid"><div>© <span id="year"></span> AideBudgetJeune<br><span class="note">Calcul indicatif, non officiel. Les montants sont modifiables.</span></div><div><a href="../mentions-legales.html">Mentions légales</a> · <a href="../confidentialite.html">Confidentialité</a> · <a href="../sitemap.xml">Sitemap</a></div></div></footer>
+<script src="../assets/script.js"></script>
+</body></html>
