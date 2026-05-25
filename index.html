@@ -1,0 +1,642 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AideBudgetJeunes - Simulateur budget étudiant et apprenti</title>
+  <meta name="description" content="Calcule gratuitement un budget étudiant ou apprenti selon la ville, le loyer, les aides, la bourse et les dépenses mensuelles.">
+  <link rel="canonical" href="https://aidebudgetjeunes-pages-dev.pages.dev/">
+  <meta property="og:title" content="AideBudgetJeunes - Simulateur budget étudiant et apprenti">
+  <meta property="og:description" content="Calcule gratuitement un budget étudiant ou apprenti selon la ville, le loyer, les aides, la bourse et les dépenses mensuelles.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://aidebudgetjeunes-pages-dev.pages.dev/">
+  <meta name="theme-color" content="#2454e8">
+  <style>
+:root{
+  --bg:#f6f8fb; --card:#ffffff; --text:#152033; --muted:#5e6b7f; --line:#e4e9f2;
+  --primary:#2454e8; --primary-dark:#173ab2; --accent:#10b981; --warning:#f59e0b;
+  --shadow:0 18px 45px rgba(21,32,51,.10); --radius:22px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);line-height:1.55}
+a{color:inherit;text-decoration:none}
+.container{max-width:1120px;margin:0 auto;padding:0 20px}
+.topbar{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.9);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.nav{height:70px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:900;font-size:1.08rem}
+.logo-mark{width:36px;height:36px;border-radius:12px;background:linear-gradient(135deg,var(--primary),#7c3aed);display:grid;place-items:center;color:#fff}
+.nav-links{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.nav-links a{font-weight:700;color:#344054;padding:10px 12px;border-radius:12px}
+.nav-links a:hover{background:#eef3ff;color:var(--primary)}
+.hero{padding:72px 0 42px;background:radial-gradient(circle at top left,#dbeafe 0,rgba(219,234,254,0) 35%),radial-gradient(circle at top right,#dcfce7 0,rgba(220,252,231,0) 35%)}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:30px;align-items:center}
+.badge{display:inline-flex;align-items:center;gap:8px;background:#eef3ff;border:1px solid #dbe5ff;color:var(--primary);font-weight:800;border-radius:999px;padding:8px 12px;margin-bottom:16px}
+h1{font-size:clamp(2.05rem,5vw,4rem);line-height:1.03;margin:0 0 18px;letter-spacing:-.045em}
+.lead{font-size:1.18rem;color:var(--muted);max-width:720px;margin:0 0 26px}
+.cta-row{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;border:none;border-radius:15px;padding:13px 18px;font-weight:900;cursor:pointer;transition:.2s}
+.btn-primary{background:var(--primary);color:#fff;box-shadow:0 12px 24px rgba(36,84,232,.22)}
+.btn-primary:hover{background:var(--primary-dark);transform:translateY(-1px)}
+.btn-secondary{background:#fff;border:1px solid var(--line);color:#1f2937}
+.btn-secondary:hover{border-color:#bdd0ff;transform:translateY(-1px)}
+.hero-card,.card,.simulator,.city-card,.info-box{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+.hero-card{padding:22px}
+.metric{display:grid;grid-template-columns:1fr auto;gap:8px;padding:15px 0;border-bottom:1px solid var(--line)}
+.metric:last-child{border-bottom:0}
+.metric strong{font-size:1.4rem;color:var(--primary)}
+.section{padding:52px 0}
+.section-title{font-size:clamp(1.7rem,3vw,2.45rem);line-height:1.12;margin:0 0 12px;letter-spacing:-.035em}
+.section-subtitle{color:var(--muted);font-size:1.03rem;margin:0 0 26px}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.card{padding:22px}
+.card h3{margin:0 0 8px;font-size:1.16rem}
+.card p{margin:0;color:var(--muted)}
+.simulator{padding:24px}
+.form-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.field label{display:block;font-size:.84rem;font-weight:850;margin-bottom:6px;color:#344054}
+.field input,.field select{width:100%;border:1px solid var(--line);border-radius:13px;padding:12px 12px;font:inherit;background:#fff}
+.field input:focus,.field select:focus{outline:3px solid #dbeafe;border-color:#93b4ff}
+.result{margin-top:18px;border-radius:18px;background:#0f172a;color:#fff;padding:20px;display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center}
+.result .amount{font-size:2rem;font-weight:950}
+.result p{margin:4px 0 0;color:#cbd5e1}
+.tools{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:18px}
+.search{flex:1;min-width:240px;border:1px solid var(--line);border-radius:15px;padding:13px 14px;font:inherit;background:#fff}
+.select{border:1px solid var(--line);border-radius:15px;padding:13px 14px;font:inherit;background:#fff;min-width:230px}
+.city-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.city-card{padding:16px;transition:.18s}
+.city-card:hover{transform:translateY(-2px);border-color:#bcd0ff}
+.city-card .city{font-weight:950}
+.city-card .region{color:var(--muted);font-size:.88rem;margin-top:2px}
+.city-card .budget{margin-top:10px;color:var(--primary);font-weight:900}
+.ad-slot{border:2px dashed #cbd5e1;border-radius:18px;background:#fff;padding:18px;text-align:center;color:#64748b;font-weight:800}
+.info-box{padding:24px}
+.info-box ul{margin:10px 0 0;padding-left:22px;color:var(--muted)}
+.footer{background:#101828;color:#d0d5dd;margin-top:54px;padding:34px 0}
+.footer-grid{display:grid;grid-template-columns:1fr auto;gap:20px;align-items:center}
+.footer a{color:#fff;font-weight:700;margin-right:14px}
+.notice{font-size:.92rem;color:#667085}
+.breadcrumb{font-weight:800;color:var(--muted);font-size:.92rem;margin-bottom:18px}
+.breadcrumb a{color:var(--primary)}
+.table{width:100%;border-collapse:separate;border-spacing:0;border:1px solid var(--line);border-radius:18px;overflow:hidden;background:#fff}
+.table th,.table td{padding:14px;border-bottom:1px solid var(--line);text-align:left}
+.table tr:last-child td{border-bottom:0}
+.table th{background:#f8fafc;font-weight:950}
+.article{max-width:900px}
+.article h2{font-size:1.65rem;margin:34px 0 12px;letter-spacing:-.02em}
+.article p{color:#475467}
+.related{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:20px}
+@media(max-width:900px){.hero-grid,.grid-3,.footer-grid{grid-template-columns:1fr}.form-grid{grid-template-columns:repeat(2,1fr)}.city-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.nav{height:auto;padding:14px 0;align-items:flex-start}.nav-links{justify-content:flex-start}.form-grid,.city-grid,.related{grid-template-columns:1fr}.result{grid-template-columns:1fr}.hero{padding-top:38px}}
+</style>
+  
+</head>
+<body>
+
+
+<header class="topbar">
+  <div class="container nav">
+    <a class="logo" href="index.html" aria-label="Accueil AideBudgetJeunes">
+      <span class="logo-mark">€</span><span>AideBudgetJeunes</span>
+    </a>
+    <nav class="nav-links" aria-label="Navigation principale">
+      <a href="index.html#simulateur">Simulateur</a>
+      <a href="index.html#villes">Villes</a>
+      <a href="index.html#conseils">Conseils</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+<main>
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <div class="badge">Simulateur gratuit • Étudiant • Apprenti • Parent</div>
+        <h1>Calcule ton budget étudiant ou apprenti en quelques clics</h1>
+        <p class="lead">Estime rapidement le budget mensuel nécessaire selon ta ville, ton loyer, tes aides, ta bourse et tes dépenses courantes. Simple, clair, sans compte à créer.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="#simulateur">Lancer le simulateur</a>
+          <a class="btn btn-secondary" href="#villes">Voir les villes</a>
+        </div>
+      </div>
+      <aside class="hero-card" aria-label="Résumé du site">
+        <div class="metric"><span>Villes disponibles</span><strong>62</strong></div>
+        <div class="metric"><span>Pages SEO ville</span><strong>62</strong></div>
+        <div class="metric"><span>Accès</span><strong>100 % gratuit</strong></div>
+        <div class="metric"><span>Objectif</span><strong>Budget clair</strong></div>
+      </aside>
+    </div>
+  </section>
+
+  <section id="simulateur" class="section">
+    <div class="container">
+      <h2 class="section-title">Simulateur budget mensuel</h2>
+      <p class="section-subtitle">Renseigne les montants. Le résultat est indicatif et sert à préparer un budget réaliste.</p>
+      <div class="simulator">
+        <form id="budgetForm" onsubmit="return false;">
+          <div class="form-grid">
+            <div class="field"><label for="villeSelect">Ville</label><select id="villeSelect"><option value="">Choisir une ville</option><option value="Paris" data-rent="780" data-transport="95">Paris</option>
+<option value="Lyon" data-rent="520" data-transport="70">Lyon</option>
+<option value="Marseille" data-rent="470" data-transport="65">Marseille</option>
+<option value="Toulouse" data-rent="460" data-transport="55">Toulouse</option>
+<option value="Bordeaux" data-rent="500" data-transport="60">Bordeaux</option>
+<option value="Lille" data-rent="430" data-transport="55">Lille</option>
+<option value="Nantes" data-rent="450" data-transport="55">Nantes</option>
+<option value="Rennes" data-rent="440" data-transport="50">Rennes</option>
+<option value="Grenoble" data-rent="420" data-transport="55">Grenoble</option>
+<option value="Montpellier" data-rent="460" data-transport="55">Montpellier</option>
+<option value="Nice" data-rent="560" data-transport="60">Nice</option>
+<option value="Strasbourg" data-rent="440" data-transport="55">Strasbourg</option>
+<option value="Dijon" data-rent="370" data-transport="45">Dijon</option>
+<option value="Besançon" data-rent="340" data-transport="45">Besançon</option>
+<option value="Clermont-Ferrand" data-rent="350" data-transport="45">Clermont-Ferrand</option>
+<option value="Saint-Étienne" data-rent="320" data-transport="45">Saint-Étienne</option>
+<option value="Angers" data-rent="380" data-transport="45">Angers</option>
+<option value="Tours" data-rent="390" data-transport="45">Tours</option>
+<option value="Orléans" data-rent="400" data-transport="45">Orléans</option>
+<option value="Caen" data-rent="380" data-transport="45">Caen</option>
+<option value="Rouen" data-rent="390" data-transport="50">Rouen</option>
+<option value="Le Havre" data-rent="360" data-transport="45">Le Havre</option>
+<option value="Amiens" data-rent="350" data-transport="45">Amiens</option>
+<option value="Reims" data-rent="380" data-transport="45">Reims</option>
+<option value="Metz" data-rent="370" data-transport="45">Metz</option>
+<option value="Nancy" data-rent="370" data-transport="45">Nancy</option>
+<option value="Mulhouse" data-rent="330" data-transport="45">Mulhouse</option>
+<option value="Brest" data-rent="350" data-transport="45">Brest</option>
+<option value="Lorient" data-rent="340" data-transport="45">Lorient</option>
+<option value="Vannes" data-rent="420" data-transport="45">Vannes</option>
+<option value="Poitiers" data-rent="330" data-transport="40">Poitiers</option>
+<option value="Limoges" data-rent="310" data-transport="40">Limoges</option>
+<option value="La Rochelle" data-rent="460" data-transport="45">La Rochelle</option>
+<option value="Pau" data-rent="340" data-transport="40">Pau</option>
+<option value="Bayonne" data-rent="470" data-transport="45">Bayonne</option>
+<option value="Perpignan" data-rent="330" data-transport="40">Perpignan</option>
+<option value="Nîmes" data-rent="350" data-transport="40">Nîmes</option>
+<option value="Avignon" data-rent="380" data-transport="45">Avignon</option>
+<option value="Aix-en-Provence" data-rent="560" data-transport="55">Aix-en-Provence</option>
+<option value="Toulon" data-rent="430" data-transport="50">Toulon</option>
+<option value="Annecy" data-rent="570" data-transport="50">Annecy</option>
+<option value="Chambéry" data-rent="420" data-transport="45">Chambéry</option>
+<option value="Bourg-en-Bresse" data-rent="350" data-transport="40">Bourg-en-Bresse</option>
+<option value="Ambérieu-en-Bugey" data-rent="360" data-transport="45">Ambérieu-en-Bugey</option>
+<option value="Lagnieu" data-rent="340" data-transport="45">Lagnieu</option>
+<option value="Saint-Vulbas" data-rent="340" data-transport="45">Saint-Vulbas</option>
+<option value="Bourgoin-Jallieu" data-rent="390" data-transport="50">Bourgoin-Jallieu</option>
+<option value="Villeurbanne" data-rent="500" data-transport="65">Villeurbanne</option>
+<option value="Bron" data-rent="470" data-transport="60">Bron</option>
+<option value="Villefranche-sur-Saône" data-rent="400" data-transport="50">Villefranche-sur-Saône</option>
+<option value="Mâcon" data-rent="350" data-transport="45">Mâcon</option>
+<option value="Chalon-sur-Saône" data-rent="330" data-transport="45">Chalon-sur-Saône</option>
+<option value="Auxerre" data-rent="330" data-transport="40">Auxerre</option>
+<option value="Troyes" data-rent="340" data-transport="45">Troyes</option>
+<option value="Roanne" data-rent="310" data-transport="40">Roanne</option>
+<option value="Valence" data-rent="370" data-transport="45">Valence</option>
+<option value="Montélimar" data-rent="350" data-transport="45">Montélimar</option>
+<option value="Romans-sur-Isère" data-rent="330" data-transport="45">Romans-sur-Isère</option>
+<option value="Gap" data-rent="380" data-transport="45">Gap</option>
+<option value="Thonon-les-Bains" data-rent="520" data-transport="50">Thonon-les-Bains</option>
+<option value="Annemasse" data-rent="560" data-transport="60">Annemasse</option>
+<option value="Béziers" data-rent="320" data-transport="40">Béziers</option></select></div>
+            <div class="field"><label for="loyer">Loyer charges comprises</label><input id="loyer" type="number" value="400" min="0"></div>
+            <div class="field"><label for="apl">APL estimée</label><input id="apl" type="number" value="150" min="0"></div>
+            <div class="field"><label for="bourse">Bourse / aide familiale</label><input id="bourse" type="number" value="250" min="0"></div>
+            <div class="field"><label for="alimentation">Alimentation</label><input id="alimentation" type="number" value="220" min="0"></div>
+            <div class="field"><label for="transport">Transport</label><input id="transport" type="number" value="45" min="0"></div>
+            <div class="field"><label for="telephone">Téléphone / internet</label><input id="telephone" type="number" value="20" min="0"></div>
+            <div class="field"><label for="loisirs">Loisirs / divers</label><input id="loisirs" type="number" value="80" min="0"></div>
+            <div class="field"><label for="assurance">Assurance</label><input id="assurance" type="number" value="15" min="0"></div>
+          </div>
+        </form>
+        <div class="result">
+          <div>
+            <strong>Budget à prévoir après aides</strong>
+            <p id="resultText">Calcul en cours.</p>
+          </div>
+          <div class="amount" id="resultAmount">0 €</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="conseils">
+    <div class="container">
+      <h2 class="section-title">Les postes à ne pas oublier</h2>
+      <div class="grid-3">
+        <article class="card"><h3>Logement</h3><p>Loyer, charges, assurance habitation, dépôt de garantie et frais d’installation. C’est souvent le poste qui pilote tout le reste.</p></article>
+        <article class="card"><h3>Vie quotidienne</h3><p>Alimentation, téléphone, transport, hygiène, santé, équipements scolaires et imprévus. Le fameux “petit rien” qui mange le budget.</p></article>
+        <article class="card"><h3>Aides</h3><p>Bourse, APL, aide familiale, salaire d’apprentissage ou job étudiant. Toujours vérifier les montants auprès des organismes officiels.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="ad-slot">Emplacement publicité — à activer après validation Google AdSense</div>
+    </div>
+  </section>
+
+  <section id="villes" class="section">
+    <div class="container">
+      <h2 class="section-title">Budgets par ville</h2>
+      <p class="section-subtitle">Clique sur une ville pour ouvrir sa page dédiée avec budget minimum, budget confortable et conseils pratiques.</p>
+      <div class="tools">
+        <input id="searchCity" class="search" type="search" placeholder="Rechercher une ville : Lyon, Valence, Paris...">
+        <select id="regionFilter" class="select"><option value="">Toutes les régions</option><option value="Auvergne-Rhône-Alpes">Auvergne-Rhône-Alpes</option>
+<option value="Bourgogne-Franche-Comté">Bourgogne-Franche-Comté</option>
+<option value="Bretagne">Bretagne</option>
+<option value="Centre-Val de Loire">Centre-Val de Loire</option>
+<option value="Grand Est">Grand Est</option>
+<option value="Hauts-de-France">Hauts-de-France</option>
+<option value="Normandie">Normandie</option>
+<option value="Nouvelle-Aquitaine">Nouvelle-Aquitaine</option>
+<option value="Occitanie">Occitanie</option>
+<option value="Pays de la Loire">Pays de la Loire</option>
+<option value="Provence-Alpes-Côte d’Azur">Provence-Alpes-Côte d’Azur</option>
+<option value="Île-de-France">Île-de-France</option></select>
+      </div>
+      <div class="city-grid"><a class="city-card" data-city="paris" data-region="Île-de-France" href="villes/budget-etudiant-paris.html">
+      <div class="city">Paris</div>
+      <div class="region">Île-de-France</div>
+      <div class="budget">Budget indicatif : 1195 € à 1505 € / mois</div>
+    </a>
+<a class="city-card" data-city="lyon" data-region="Auvergne-Rhône-Alpes" href="villes/budget-etudiant-lyon.html">
+      <div class="city">Lyon</div>
+      <div class="region">Auvergne-Rhône-Alpes</div>
+      <div class="budget">Budget indicatif : 850 € à 1150 € / mois</div>
+    </a>
+<a class="city-card" data-city="marseille" data-region="Provence-Alpes-Côte d’Azur" href="villes/budget-etudiant-marseille.html">
+      <div class="city">Marseille</div>
+      <div class="region">Provence-Alpes-Côte d’Azur</div>
+      <div class="budget">Budget indicatif : 785 € à 1075 € / mois</div>
+    </a>
+<a class="city-card" data-city="toulouse" data-region="Occitanie" href="villes/budget-etudiant-toulouse.html">
+      <div class="city">Toulouse</div>
+      <div class="region">Occitanie</div>
+      <div class="budget">Budget indicatif : 755 € à 1035 € / mois</div>
+    </a>
+<a class="city-card" data-city="bordeaux" data-region="Nouvelle-Aquitaine" href="villes/budget-etudiant-bordeaux.html">
+      <div class="city">Bordeaux</div>
+      <div class="region">Nouvelle-Aquitaine</div>
+      <div class="budget">Budget indicatif : 810 € à 1110 € / mois</div>
+    </a>
+<a class="city-card" data-city="lille" data-region="Hauts-de-France" href="villes/budget-etudiant-lille.html">
+      <div class="city">Lille</div>
+      <div class="region">Hauts-de-France</div>
+      <div class="budget">Budget indicatif : 720 € à 990 € / mois</div>
+    </a>
+<a class="city-card" data-city="nantes" data-region="Pays de la Loire" href="villes/budget-etudiant-nantes.html">
+      <div class="city">Nantes</div>
+      <div class="region">Pays de la Loire</div>
+      <div class="budget">Budget indicatif : 745 € à 1025 € / mois</div>
+    </a>
+<a class="city-card" data-city="rennes" data-region="Bretagne" href="villes/budget-etudiant-rennes.html">
+      <div class="city">Rennes</div>
+      <div class="region">Bretagne</div>
+      <div class="budget">Budget indicatif : 725 € à 1005 € / mois</div>
+    </a>
+<a class="city-card" data-city="grenoble" data-region="Auvergne-Rhône-Alpes" href="villes/budget-etudiant-grenoble.html">
+      <div class="city">Grenoble</div>
+      <div class="region">Auvergne-Rhône-Alpes</div>
+      <div class="budget">Budget indicatif : 710 € à 990 € / mois</div>
+    </a>
+<a class="city-card" data-city="montpellier" data-region="Occitanie" href="villes/budget-etudiant-montpellier.html">
+      <div class="city">Montpellier</div>
+      <div class="region">Occitanie</div>
+      <div class="budget">Budget indicatif : 755 € à 1045 € / mois</div>
+    </a>
+<a class="city-card" data-city="nice" data-region="Provence-Alpes-Côte d’Azur" href="villes/budget-etudiant-nice.html">
+      <div class="city">Nice</div>
+      <div class="region">Provence-Alpes-Côte d’Azur</div>
+      <div class="budget">Budget indicatif : 880 € à 1180 € / mois</div>
+    </a>
+<a class="city-card" data-city="strasbourg" data-region="Grand Est" href="villes/budget-etudiant-strasbourg.html">
+      <div class="city">Strasbourg</div>
+      <div class="region">Grand Est</div>
+      <div class="budget">Budget indicatif : 730 € à 1010 € / mois</div>
+    </a>
+<a class="city-card" data-city="dijon" data-region="Bourgogne-Franche-Comté" href="villes/budget-etudiant-dijon.html">
+      <div class="city">Dijon</div>
+      <div class="region">Bourgogne-Franche-Comté</div>
+      <div class="budget">Budget indicatif : 635 € à 905 € / mois</div>
+    </a>
+<a class="city-card" data-city="besançon" data-region="Bourgogne-Franche-Comté" href="villes/budget-etudiant-besancon.html">
+      <div class="city">Besançon</div>
+      <div class="region">Bourgogne-Franche-Comté</div>
+      <div class="budget">Budget indicatif : 600 € à 870 € / mois</div>
+    </a>
+<a class="city-card" data-city="clermont-ferrand" data-region="Auvergne-Rhône-Alpes" href="villes/budget-etudiant-clermont-ferrand.html">
+      <div class="city">Clermont-Ferrand</div>
+      <div class="region">Auvergne-Rhône-Alpes</div>
+      <div class="budget">Budget indicatif : 610 € à 880 € / mois</div>
+    </a>
+<a class="city-card" data-city="saint-étienne" data-region="Auvergne-Rhône-Alpes" href="villes/budget-etudiant-saint-etienne.html">
+      <div class="city">Saint-Étienne</div>
+      <div class="region">Auvergne-Rhône-Alpes</div>
+      <div class="budget">Budget indicatif : 575 € à 845 € / mois</div>
+    </a>
+<a class="city-card" data-city="angers" data-region="Pays de la Loire" href="villes/budget-etudiant-angers.html">
+      <div class="city">Angers</div>
+      <div class="region">Pays de la Loire</div>
+      <div class="budget">Budget indicatif : 645 € à 915 € / mois</div>
+    </a>
+<a class="city-card" data-city="tours" data-region="Centre-Val de Loire" href="villes/budget-etudiant-tours.html">
+      <div class="city">Tours</div>
+      <div class="region">Centre-Val de Loire</div>
+      <div class="budget">Budget indicatif : 660 € à 930 € / mois</div>
+    </a>
+<a class="city-card" data-city="orléans" data-region="Centre-Val de Loire" href="villes/budget-etudiant-orleans.html">
+      <div class="city">Orléans</div>
+      <div class="region">Centre-Val de Loire</div>
+      <div class="budget">Budget indicatif : 670 € à 940 € / mois</div>
+    </a>
+<a class="city-card" data-city="caen" data-region="Normandie" href="villes/budget-etudiant-caen.html">
+      <div class="city">Caen</div>
+      <div class="region">Normandie</div>
+      <div class="budget">Budget indicatif : 645 € à 915 € / mois</div>
+    </a>
+<a class="city-card" data-city="rouen" data-region="Normandie" href="villes/budget-etudiant-rouen.html">
+      <div class="city">Rouen</div>
+      <div class="region">Normandie</div>
+      <div class="budget">Budget indicatif : 665 € à 945 € / mois</div>
+    </a>
+<a class="city-card" data-city="le havre" data-region="Normandie" href="villes/budget-etudiant-le-havre.html">
+      <div class="city">Le Havre</div>
+      <div class="region">Normandie</div>
+      <div class="budget">Budget indicatif : 620 € à 890 € / mois</div>
+    </a>
+<a class="city-card" data-city="amiens" data-region="Hauts-de-France" href="villes/budget-etudiant-amiens.html">
+      <div class="city">Amiens</div>
+      <div class="region">Hauts-de-France</div>
+      <div class="budget">Budget indicatif : 610 € à 880 € / mois</div>
+    </a>
+<a class="city-card" data-city="reims" data-region="Grand Est" href="villes/budget-etudiant-reims.html">
+      <div class="city">Reims</div>
+      <div class="region">Grand Est</div>
+      <div class="budget">Budget indicatif : 645 € à 915 € / mois</div>
+    </a>
+<a class="city-card" data-city="metz" data-region="Grand Est" href="villes/budget-etudiant-metz.html">
+      <div class="city">Metz</div>
+      <div class="region">Grand Est</div>
+      <div class="budget">Budget indicatif : 635 € à 905 € / mois</div>
+    </a>
+<a class="city-card" data-city="nancy" data-region="Grand Est" href="villes/budget-etudiant-nancy.html">
+      <div class="city">Nancy</div>
+      <div class="region">Grand Est</div>
+      <div class="budget">Budget indicatif : 635 € à 905 € / mois</div>
+    </a>
+<a class="city-card" data-city="mulhouse" data-region="Grand Est" href="villes/budget-etudiant-mulhouse.html">
+      <div class="city">Mulhouse</div>
+      <div class="region">Grand Est</div>
+      <div class="budget">Budget indicatif : 585 € à 855 € / mois</div>
+    </a>
+<a class="city-card" data-city="brest" data-region="Bretagne" href="villes/budget-etudiant-brest.html">
+      <div class="city">Brest</div>
+      <div class="region">Bretagne</div>
+      <div class="budget">Budget indicatif : 610 € à 880 € / mois</div>
+    </a>
+<a class="city-card" data-city="lorient" data-region="Bretagne" href="villes/budget-etudiant-lorient.html">
+      <div class="city">Lorient</div>
+      <div class="region">Bretagne</div>
+      <div class="budget">Budget indicatif : 600 € à 870 € / mois</div>
+    </a>
+<a class="city-card" data-city="vannes" data-region="Bretagne" href="villes/budget-etudiant-vannes.html">
+      <div class="city">Vannes</div>
+      <div class="region">Bretagne</div>
+      <div class="budget">Budget indicatif : 690 € à 960 € / mois</div>
+    </a>
+<a class="city-card" data-city="poitiers" data-region="Nouvelle-Aquitaine" href="villes/budget-etudiant-poitiers.html">
+      <div class="city">Poitiers</div>
+      <div class="region">Nouvelle-Aquitaine</div>
+      <div class="budget">Budget indicatif : 580 € à 850 € / mois</div>
+    </a>
+<a class="city-card" data-city="limoges" data-region="Nouvelle-Aquitaine" href="villes/budget-etudiant-limoges.html">
+      <div class="city">Limoges</div>
+      <div class="region">Nouvelle-Aquitaine</div>
+      <div class="budget">Budget indicatif : 555 € à 825 € / mois</div>
+    </a>
+<a class="city-card" data-city="la rochelle" data-region="Nouvelle-Aquitaine" href="villes/budget-etudiant-la-rochelle.html">
+      <div class="city">La Rochelle</div>
+      <div class="region">Nouvelle-Aquitaine</div>
+      <div class="budget">Budget indicatif : 745 € à 1045 € / mois</div>
+    </a>
+<a class="city-card" data-city="pau" data-region="Nouvelle-Aquitaine" href="villes/budget-etudiant-pau.html">
+      <div class="city">Pau</div>
+      <div class="region">Nouvelle-Aquitaine</div>
+      <div class="budget">Budget indicatif : 590 € à 860 € / mois</div>
+    </a>
+<a class="city-card" data-city="bayonne" data-region="Nouvelle-Aquitaine" href="villes/budget-etudiant-bayonne.html">
+      <div class="city">Bayonne</div>
+      <div class="region">Nouvelle-Aquitaine</div>
+      <div class="budget">Budget indicatif : 755 € à 1045 € / mois</div>
+    </a>
+<a class="city-card" data-city="perpignan" data-region="Occitanie" href="villes/budget-etudiant-perpignan.html">
+      <div class="city">Perpignan</div>
+      <div class="region">Occitanie</div>
+      <div class="budget">Budget indicatif : 580 € à 850 € / mois</div>
+    </a>
+<a class="city-card" data-city="nîmes" data-region="Occitanie" href="villes/budget-etudiant-nimes.html">
+      <div class="city">Nîmes</div>
+      <div class="region">Occitanie</div>
+      <div class="budget">Budget indicatif : 605 € à 875 € / mois</div>
+    </a>
+<a class="city-card" data-city="avignon" data-region="Provence-Alpes-Côte d’Azur" href="villes/budget-etudiant-avignon.html">
+      <div class="city">Avignon</div>
+      <div class="region">Provence-Alpes-Côte d’Azur</div>
+      <div class="budget">Budget indicatif : 645 € à 925 € / mois</div>
+    </a>
+<a class="city-card" data-city="aix-en-provence" data-region="Provence-Alpes-Côte d’Azur" href="villes/budget-etudiant-aix-en-provence.html">
+      <div class="city">Aix-en-Provence</div>
+      <div class="region">Provence-Alpes-Côte d’Azur</div>
+      <div class="budget">Budget indicatif : 875 € à 1175 € / mois</div>
+    </a>
+<a class="city-card" data-city="toulon" data-region="Provence-Alpes-Côte d’Azur" href="villes/budget-etudiant-toulon.html">
+      <div class="city">Toulon</div>
+      <div class="region">Provence-Alpes-Côte d’Azur</div>
+      <div class="budget">Budget indicatif : 710 € à 990 € / mois</div>
+    </a>
+<a class="city-card" data-city="annecy" data-region="Auvergne-Rhône-Alpes" href="villes/budget-etudiant-annecy.html">
+      <div class="city">Annecy</div>
+      <div class="region">Auvergne-Rhône-Alpes</div>
+      <div class="budget">Budget indicatif : 880 € à 1190 € / mois</div>
+    </a>
+<a class="city-card" data-city="chambéry" data-region="Auvergne-Rhône-Alpes" href="villes/budget-etudiant-chambery.html">
+      <div class="city">Chambéry</div>
+      <div class="region">Auvergne-Rhône-Alpes</div>
+      <div class="budget">Budget indicatif : 690 € à 970 € / mois</div>
+    </a>
+<a class="city-card" data-city="bourg-en-bresse" data-region="Auvergne-Rhône-Alpes" href="villes/budget-etudiant-bourg-en-bresse.html">
+      <div class="city">Bourg-en-Bresse</div>
+      <div class="region">Auvergne-Rhône-Alpes</div>
+      <div class="budget">Budget indicatif : 600 € à 870 € / mois</div>
+    </a>
+<a class="city-card" data-city="ambérieu-en-bugey" data-region="Auvergne-Rhône-Alpes" href="villes/budget-etudiant-amberieu-en-bugey.html">
+      <div class="city">Ambérieu-en-Bugey</div>
+      <div class="region">Auvergne-Rhône-Alpes</div>
+      <div class="budget">Budget indicatif : 620 € à 900 € / mois</div>
+    </a>
+<a class="city-card" data-city="lagnieu" data-region="Auvergne-Rhône-Alpes" href="villes/budget-etudiant-lagnieu.html">
+      <div class="city">Lagnieu</div>
+      <div class="region">Auvergne-Rhône-Alpes</div>
+      <div class="budget">Budget indicatif : 595 € à 865 € / mois</div>
+    </a>
+<a class="city-card" data-city="saint-vulbas" data-region="Auvergne-Rhône-Alpes" href="villes/budget-etudiant-saint-vulbas.html">
+      <div class="city">Saint-Vulbas</div>
+      <div class="region">Auvergne-Rhône-Alpes</div>
+      <div class="budget">Budget indicatif : 595 € à 875 € / mois</div>
+    </a>
+<a class="city-card" data-city="bourgoin-jallieu" data-region="Auvergne-Rhône-Alpes" href="villes/budget-etudiant-bourgoin-jallieu.html">
+      <div class="city">Bourgoin-Jallieu</div>
+      <div class="region">Auvergne-Rhône-Alpes</div>
+      <div class="budget">Budget indicatif : 665 € à 935 € / mois</div>
+    </a>
+<a class="city-card" data-city="villeurbanne" data-region="Auvergne-Rhône-Alpes" href="villes/budget-etudiant-villeurbanne.html">
+      <div class="city">Villeurbanne</div>
+      <div class="region">Auvergne-Rhône-Alpes</div>
+      <div class="budget">Budget indicatif : 815 € à 1105 € / mois</div>
+    </a>
+<a class="city-card" data-city="bron" data-region="Auvergne-Rhône-Alpes" href="villes/budget-etudiant-bron.html">
+      <div class="city">Bron</div>
+      <div class="region">Auvergne-Rhône-Alpes</div>
+      <div class="budget">Budget indicatif : 770 € à 1060 € / mois</div>
+    </a>
+<a class="city-card" data-city="villefranche-sur-saône" data-region="Auvergne-Rhône-Alpes" href="villes/budget-etudiant-villefranche-sur-saone.html">
+      <div class="city">Villefranche-sur-Saône</div>
+      <div class="region">Auvergne-Rhône-Alpes</div>
+      <div class="budget">Budget indicatif : 675 € à 945 € / mois</div>
+    </a>
+<a class="city-card" data-city="mâcon" data-region="Bourgogne-Franche-Comté" href="villes/budget-etudiant-macon.html">
+      <div class="city">Mâcon</div>
+      <div class="region">Bourgogne-Franche-Comté</div>
+      <div class="budget">Budget indicatif : 610 € à 880 € / mois</div>
+    </a>
+<a class="city-card" data-city="chalon-sur-saône" data-region="Bourgogne-Franche-Comté" href="villes/budget-etudiant-chalon-sur-saone.html">
+      <div class="city">Chalon-sur-Saône</div>
+      <div class="region">Bourgogne-Franche-Comté</div>
+      <div class="budget">Budget indicatif : 585 € à 855 € / mois</div>
+    </a>
+<a class="city-card" data-city="auxerre" data-region="Bourgogne-Franche-Comté" href="villes/budget-etudiant-auxerre.html">
+      <div class="city">Auxerre</div>
+      <div class="region">Bourgogne-Franche-Comté</div>
+      <div class="budget">Budget indicatif : 580 € à 850 € / mois</div>
+    </a>
+<a class="city-card" data-city="troyes" data-region="Grand Est" href="villes/budget-etudiant-troyes.html">
+      <div class="city">Troyes</div>
+      <div class="region">Grand Est</div>
+      <div class="budget">Budget indicatif : 600 € à 870 € / mois</div>
+    </a>
+<a class="city-card" data-city="roanne" data-region="Auvergne-Rhône-Alpes" href="villes/budget-etudiant-roanne.html">
+      <div class="city">Roanne</div>
+      <div class="region">Auvergne-Rhône-Alpes</div>
+      <div class="budget">Budget indicatif : 555 € à 825 € / mois</div>
+    </a>
+<a class="city-card" data-city="valence" data-region="Auvergne-Rhône-Alpes" href="villes/budget-etudiant-valence.html">
+      <div class="city">Valence</div>
+      <div class="region">Auvergne-Rhône-Alpes</div>
+      <div class="budget">Budget indicatif : 635 € à 905 € / mois</div>
+    </a>
+<a class="city-card" data-city="montélimar" data-region="Auvergne-Rhône-Alpes" href="villes/budget-etudiant-montelimar.html">
+      <div class="city">Montélimar</div>
+      <div class="region">Auvergne-Rhône-Alpes</div>
+      <div class="budget">Budget indicatif : 610 € à 880 € / mois</div>
+    </a>
+<a class="city-card" data-city="romans-sur-isère" data-region="Auvergne-Rhône-Alpes" href="villes/budget-etudiant-romans-sur-isere.html">
+      <div class="city">Romans-sur-Isère</div>
+      <div class="region">Auvergne-Rhône-Alpes</div>
+      <div class="budget">Budget indicatif : 585 € à 855 € / mois</div>
+    </a>
+<a class="city-card" data-city="gap" data-region="Provence-Alpes-Côte d’Azur" href="villes/budget-etudiant-gap.html">
+      <div class="city">Gap</div>
+      <div class="region">Provence-Alpes-Côte d’Azur</div>
+      <div class="budget">Budget indicatif : 645 € à 925 € / mois</div>
+    </a>
+<a class="city-card" data-city="thonon-les-bains" data-region="Auvergne-Rhône-Alpes" href="villes/budget-etudiant-thonon-les-bains.html">
+      <div class="city">Thonon-les-Bains</div>
+      <div class="region">Auvergne-Rhône-Alpes</div>
+      <div class="budget">Budget indicatif : 815 € à 1105 € / mois</div>
+    </a>
+<a class="city-card" data-city="annemasse" data-region="Auvergne-Rhône-Alpes" href="villes/budget-etudiant-annemasse.html">
+      <div class="city">Annemasse</div>
+      <div class="region">Auvergne-Rhône-Alpes</div>
+      <div class="budget">Budget indicatif : 880 € à 1180 € / mois</div>
+    </a>
+<a class="city-card" data-city="béziers" data-region="Occitanie" href="villes/budget-etudiant-beziers.html">
+      <div class="city">Béziers</div>
+      <div class="region">Occitanie</div>
+      <div class="budget">Budget indicatif : 565 € à 835 € / mois</div>
+    </a></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container info-box">
+      <h2 class="section-title">Méthode de calcul</h2>
+      <p class="section-subtitle">Le site additionne les dépenses courantes puis soustrait les aides saisies. Les chiffres par ville sont des repères pratiques pour démarrer une estimation.</p>
+      <ul>
+        <li>Les montants ne remplacent pas une simulation officielle CAF ou CROUS.</li>
+        <li>Le budget réel dépend du logement, du transport, du rythme de vie et des aides accordées.</li>
+        <li>Les pages villes sont pensées pour le référencement naturel et l’information utilisateur.</li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="container footer-grid">
+    <div>
+      <strong>AideBudgetJeunes</strong>
+      <div class="notice">Estimations indicatives. Les aides officielles doivent être vérifiées auprès de la CAF, du CROUS ou de l’établissement concerné.</div>
+    </div>
+    <div>
+      <a href="mentions-legales.html">Mentions légales</a>
+      <a href="confidentialite.html">Confidentialité</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+const villes = [{"name": "Paris", "region": "Île-de-France", "slug": "paris", "file": "budget-etudiant-paris.html", "rentLow": 780, "rentHigh": 950, "transport": 95, "living": 320, "minBudget": 1195, "comfortBudget": 1505}, {"name": "Lyon", "region": "Auvergne-Rhône-Alpes", "slug": "lyon", "file": "budget-etudiant-lyon.html", "rentLow": 520, "rentHigh": 680, "transport": 70, "living": 260, "minBudget": 850, "comfortBudget": 1150}, {"name": "Marseille", "region": "Provence-Alpes-Côte d’Azur", "slug": "marseille", "file": "budget-etudiant-marseille.html", "rentLow": 470, "rentHigh": 620, "transport": 65, "living": 250, "minBudget": 785, "comfortBudget": 1075}, {"name": "Toulouse", "region": "Occitanie", "slug": "toulouse", "file": "budget-etudiant-toulouse.html", "rentLow": 460, "rentHigh": 600, "transport": 55, "living": 240, "minBudget": 755, "comfortBudget": 1035}, {"name": "Bordeaux", "region": "Nouvelle-Aquitaine", "slug": "bordeaux", "file": "budget-etudiant-bordeaux.html", "rentLow": 500, "rentHigh": 660, "transport": 60, "living": 250, "minBudget": 810, "comfortBudget": 1110}, {"name": "Lille", "region": "Hauts-de-France", "slug": "lille", "file": "budget-etudiant-lille.html", "rentLow": 430, "rentHigh": 560, "transport": 55, "living": 235, "minBudget": 720, "comfortBudget": 990}, {"name": "Nantes", "region": "Pays de la Loire", "slug": "nantes", "file": "budget-etudiant-nantes.html", "rentLow": 450, "rentHigh": 590, "transport": 55, "living": 240, "minBudget": 745, "comfortBudget": 1025}, {"name": "Rennes", "region": "Bretagne", "slug": "rennes", "file": "budget-etudiant-rennes.html", "rentLow": 440, "rentHigh": 580, "transport": 50, "living": 235, "minBudget": 725, "comfortBudget": 1005}, {"name": "Grenoble", "region": "Auvergne-Rhône-Alpes", "slug": "grenoble", "file": "budget-etudiant-grenoble.html", "rentLow": 420, "rentHigh": 560, "transport": 55, "living": 235, "minBudget": 710, "comfortBudget": 990}, {"name": "Montpellier", "region": "Occitanie", "slug": "montpellier", "file": "budget-etudiant-montpellier.html", "rentLow": 460, "rentHigh": 610, "transport": 55, "living": 240, "minBudget": 755, "comfortBudget": 1045}, {"name": "Nice", "region": "Provence-Alpes-Côte d’Azur", "slug": "nice", "file": "budget-etudiant-nice.html", "rentLow": 560, "rentHigh": 720, "transport": 60, "living": 260, "minBudget": 880, "comfortBudget": 1180}, {"name": "Strasbourg", "region": "Grand Est", "slug": "strasbourg", "file": "budget-etudiant-strasbourg.html", "rentLow": 440, "rentHigh": 580, "transport": 55, "living": 235, "minBudget": 730, "comfortBudget": 1010}, {"name": "Dijon", "region": "Bourgogne-Franche-Comté", "slug": "dijon", "file": "budget-etudiant-dijon.html", "rentLow": 370, "rentHigh": 500, "transport": 45, "living": 220, "minBudget": 635, "comfortBudget": 905}, {"name": "Besançon", "region": "Bourgogne-Franche-Comté", "slug": "besancon", "file": "budget-etudiant-besancon.html", "rentLow": 340, "rentHigh": 470, "transport": 45, "living": 215, "minBudget": 600, "comfortBudget": 870}, {"name": "Clermont-Ferrand", "region": "Auvergne-Rhône-Alpes", "slug": "clermont-ferrand", "file": "budget-etudiant-clermont-ferrand.html", "rentLow": 350, "rentHigh": 480, "transport": 45, "living": 215, "minBudget": 610, "comfortBudget": 880}, {"name": "Saint-Étienne", "region": "Auvergne-Rhône-Alpes", "slug": "saint-etienne", "file": "budget-etudiant-saint-etienne.html", "rentLow": 320, "rentHigh": 450, "transport": 45, "living": 210, "minBudget": 575, "comfortBudget": 845}, {"name": "Angers", "region": "Pays de la Loire", "slug": "angers", "file": "budget-etudiant-angers.html", "rentLow": 380, "rentHigh": 510, "transport": 45, "living": 220, "minBudget": 645, "comfortBudget": 915}, {"name": "Tours", "region": "Centre-Val de Loire", "slug": "tours", "file": "budget-etudiant-tours.html", "rentLow": 390, "rentHigh": 520, "transport": 45, "living": 225, "minBudget": 660, "comfortBudget": 930}, {"name": "Orléans", "region": "Centre-Val de Loire", "slug": "orleans", "file": "budget-etudiant-orleans.html", "rentLow": 400, "rentHigh": 530, "transport": 45, "living": 225, "minBudget": 670, "comfortBudget": 940}, {"name": "Caen", "region": "Normandie", "slug": "caen", "file": "budget-etudiant-caen.html", "rentLow": 380, "rentHigh": 510, "transport": 45, "living": 220, "minBudget": 645, "comfortBudget": 915}, {"name": "Rouen", "region": "Normandie", "slug": "rouen", "file": "budget-etudiant-rouen.html", "rentLow": 390, "rentHigh": 530, "transport": 50, "living": 225, "minBudget": 665, "comfortBudget": 945}, {"name": "Le Havre", "region": "Normandie", "slug": "le-havre", "file": "budget-etudiant-le-havre.html", "rentLow": 360, "rentHigh": 490, "transport": 45, "living": 215, "minBudget": 620, "comfortBudget": 890}, {"name": "Amiens", "region": "Hauts-de-France", "slug": "amiens", "file": "budget-etudiant-amiens.html", "rentLow": 350, "rentHigh": 480, "transport": 45, "living": 215, "minBudget": 610, "comfortBudget": 880}, {"name": "Reims", "region": "Grand Est", "slug": "reims", "file": "budget-etudiant-reims.html", "rentLow": 380, "rentHigh": 510, "transport": 45, "living": 220, "minBudget": 645, "comfortBudget": 915}, {"name": "Metz", "region": "Grand Est", "slug": "metz", "file": "budget-etudiant-metz.html", "rentLow": 370, "rentHigh": 500, "transport": 45, "living": 220, "minBudget": 635, "comfortBudget": 905}, {"name": "Nancy", "region": "Grand Est", "slug": "nancy", "file": "budget-etudiant-nancy.html", "rentLow": 370, "rentHigh": 500, "transport": 45, "living": 220, "minBudget": 635, "comfortBudget": 905}, {"name": "Mulhouse", "region": "Grand Est", "slug": "mulhouse", "file": "budget-etudiant-mulhouse.html", "rentLow": 330, "rentHigh": 460, "transport": 45, "living": 210, "minBudget": 585, "comfortBudget": 855}, {"name": "Brest", "region": "Bretagne", "slug": "brest", "file": "budget-etudiant-brest.html", "rentLow": 350, "rentHigh": 480, "transport": 45, "living": 215, "minBudget": 610, "comfortBudget": 880}, {"name": "Lorient", "region": "Bretagne", "slug": "lorient", "file": "budget-etudiant-lorient.html", "rentLow": 340, "rentHigh": 470, "transport": 45, "living": 215, "minBudget": 600, "comfortBudget": 870}, {"name": "Vannes", "region": "Bretagne", "slug": "vannes", "file": "budget-etudiant-vannes.html", "rentLow": 420, "rentHigh": 550, "transport": 45, "living": 225, "minBudget": 690, "comfortBudget": 960}, {"name": "Poitiers", "region": "Nouvelle-Aquitaine", "slug": "poitiers", "file": "budget-etudiant-poitiers.html", "rentLow": 330, "rentHigh": 460, "transport": 40, "living": 210, "minBudget": 580, "comfortBudget": 850}, {"name": "Limoges", "region": "Nouvelle-Aquitaine", "slug": "limoges", "file": "budget-etudiant-limoges.html", "rentLow": 310, "rentHigh": 440, "transport": 40, "living": 205, "minBudget": 555, "comfortBudget": 825}, {"name": "La Rochelle", "region": "Nouvelle-Aquitaine", "slug": "la-rochelle", "file": "budget-etudiant-la-rochelle.html", "rentLow": 460, "rentHigh": 620, "transport": 45, "living": 240, "minBudget": 745, "comfortBudget": 1045}, {"name": "Pau", "region": "Nouvelle-Aquitaine", "slug": "pau", "file": "budget-etudiant-pau.html", "rentLow": 340, "rentHigh": 470, "transport": 40, "living": 210, "minBudget": 590, "comfortBudget": 860}, {"name": "Bayonne", "region": "Nouvelle-Aquitaine", "slug": "bayonne", "file": "budget-etudiant-bayonne.html", "rentLow": 470, "rentHigh": 620, "transport": 45, "living": 240, "minBudget": 755, "comfortBudget": 1045}, {"name": "Perpignan", "region": "Occitanie", "slug": "perpignan", "file": "budget-etudiant-perpignan.html", "rentLow": 330, "rentHigh": 460, "transport": 40, "living": 210, "minBudget": 580, "comfortBudget": 850}, {"name": "Nîmes", "region": "Occitanie", "slug": "nimes", "file": "budget-etudiant-nimes.html", "rentLow": 350, "rentHigh": 480, "transport": 40, "living": 215, "minBudget": 605, "comfortBudget": 875}, {"name": "Avignon", "region": "Provence-Alpes-Côte d’Azur", "slug": "avignon", "file": "budget-etudiant-avignon.html", "rentLow": 380, "rentHigh": 520, "transport": 45, "living": 220, "minBudget": 645, "comfortBudget": 925}, {"name": "Aix-en-Provence", "region": "Provence-Alpes-Côte d’Azur", "slug": "aix-en-provence", "file": "budget-etudiant-aix-en-provence.html", "rentLow": 560, "rentHigh": 720, "transport": 55, "living": 260, "minBudget": 875, "comfortBudget": 1175}, {"name": "Toulon", "region": "Provence-Alpes-Côte d’Azur", "slug": "toulon", "file": "budget-etudiant-toulon.html", "rentLow": 430, "rentHigh": 570, "transport": 50, "living": 230, "minBudget": 710, "comfortBudget": 990}, {"name": "Annecy", "region": "Auvergne-Rhône-Alpes", "slug": "annecy", "file": "budget-etudiant-annecy.html", "rentLow": 570, "rentHigh": 740, "transport": 50, "living": 260, "minBudget": 880, "comfortBudget": 1190}, {"name": "Chambéry", "region": "Auvergne-Rhône-Alpes", "slug": "chambery", "file": "budget-etudiant-chambery.html", "rentLow": 420, "rentHigh": 560, "transport": 45, "living": 225, "minBudget": 690, "comfortBudget": 970}, {"name": "Bourg-en-Bresse", "region": "Auvergne-Rhône-Alpes", "slug": "bourg-en-bresse", "file": "budget-etudiant-bourg-en-bresse.html", "rentLow": 350, "rentHigh": 480, "transport": 40, "living": 210, "minBudget": 600, "comfortBudget": 870}, {"name": "Ambérieu-en-Bugey", "region": "Auvergne-Rhône-Alpes", "slug": "amberieu-en-bugey", "file": "budget-etudiant-amberieu-en-bugey.html", "rentLow": 360, "rentHigh": 500, "transport": 45, "living": 215, "minBudget": 620, "comfortBudget": 900}, {"name": "Lagnieu", "region": "Auvergne-Rhône-Alpes", "slug": "lagnieu", "file": "budget-etudiant-lagnieu.html", "rentLow": 340, "rentHigh": 470, "transport": 45, "living": 210, "minBudget": 595, "comfortBudget": 865}, {"name": "Saint-Vulbas", "region": "Auvergne-Rhône-Alpes", "slug": "saint-vulbas", "file": "budget-etudiant-saint-vulbas.html", "rentLow": 340, "rentHigh": 480, "transport": 45, "living": 210, "minBudget": 595, "comfortBudget": 875}, {"name": "Bourgoin-Jallieu", "region": "Auvergne-Rhône-Alpes", "slug": "bourgoin-jallieu", "file": "budget-etudiant-bourgoin-jallieu.html", "rentLow": 390, "rentHigh": 520, "transport": 50, "living": 225, "minBudget": 665, "comfortBudget": 935}, {"name": "Villeurbanne", "region": "Auvergne-Rhône-Alpes", "slug": "villeurbanne", "file": "budget-etudiant-villeurbanne.html", "rentLow": 500, "rentHigh": 650, "transport": 65, "living": 250, "minBudget": 815, "comfortBudget": 1105}, {"name": "Bron", "region": "Auvergne-Rhône-Alpes", "slug": "bron", "file": "budget-etudiant-bron.html", "rentLow": 470, "rentHigh": 620, "transport": 60, "living": 240, "minBudget": 770, "comfortBudget": 1060}, {"name": "Villefranche-sur-Saône", "region": "Auvergne-Rhône-Alpes", "slug": "villefranche-sur-saone", "file": "budget-etudiant-villefranche-sur-saone.html", "rentLow": 400, "rentHigh": 530, "transport": 50, "living": 225, "minBudget": 675, "comfortBudget": 945}, {"name": "Mâcon", "region": "Bourgogne-Franche-Comté", "slug": "macon", "file": "budget-etudiant-macon.html", "rentLow": 350, "rentHigh": 480, "transport": 45, "living": 215, "minBudget": 610, "comfortBudget": 880}, {"name": "Chalon-sur-Saône", "region": "Bourgogne-Franche-Comté", "slug": "chalon-sur-saone", "file": "budget-etudiant-chalon-sur-saone.html", "rentLow": 330, "rentHigh": 460, "transport": 45, "living": 210, "minBudget": 585, "comfortBudget": 855}, {"name": "Auxerre", "region": "Bourgogne-Franche-Comté", "slug": "auxerre", "file": "budget-etudiant-auxerre.html", "rentLow": 330, "rentHigh": 460, "transport": 40, "living": 210, "minBudget": 580, "comfortBudget": 850}, {"name": "Troyes", "region": "Grand Est", "slug": "troyes", "file": "budget-etudiant-troyes.html", "rentLow": 340, "rentHigh": 470, "transport": 45, "living": 215, "minBudget": 600, "comfortBudget": 870}, {"name": "Roanne", "region": "Auvergne-Rhône-Alpes", "slug": "roanne", "file": "budget-etudiant-roanne.html", "rentLow": 310, "rentHigh": 440, "transport": 40, "living": 205, "minBudget": 555, "comfortBudget": 825}, {"name": "Valence", "region": "Auvergne-Rhône-Alpes", "slug": "valence", "file": "budget-etudiant-valence.html", "rentLow": 370, "rentHigh": 500, "transport": 45, "living": 220, "minBudget": 635, "comfortBudget": 905}, {"name": "Montélimar", "region": "Auvergne-Rhône-Alpes", "slug": "montelimar", "file": "budget-etudiant-montelimar.html", "rentLow": 350, "rentHigh": 480, "transport": 45, "living": 215, "minBudget": 610, "comfortBudget": 880}, {"name": "Romans-sur-Isère", "region": "Auvergne-Rhône-Alpes", "slug": "romans-sur-isere", "file": "budget-etudiant-romans-sur-isere.html", "rentLow": 330, "rentHigh": 460, "transport": 45, "living": 210, "minBudget": 585, "comfortBudget": 855}, {"name": "Gap", "region": "Provence-Alpes-Côte d’Azur", "slug": "gap", "file": "budget-etudiant-gap.html", "rentLow": 380, "rentHigh": 520, "transport": 45, "living": 220, "minBudget": 645, "comfortBudget": 925}, {"name": "Thonon-les-Bains", "region": "Auvergne-Rhône-Alpes", "slug": "thonon-les-bains", "file": "budget-etudiant-thonon-les-bains.html", "rentLow": 520, "rentHigh": 670, "transport": 50, "living": 245, "minBudget": 815, "comfortBudget": 1105}, {"name": "Annemasse", "region": "Auvergne-Rhône-Alpes", "slug": "annemasse", "file": "budget-etudiant-annemasse.html", "rentLow": 560, "rentHigh": 720, "transport": 60, "living": 260, "minBudget": 880, "comfortBudget": 1180}, {"name": "Béziers", "region": "Occitanie", "slug": "beziers", "file": "budget-etudiant-beziers.html", "rentLow": 320, "rentHigh": 450, "transport": 40, "living": 205, "minBudget": 565, "comfortBudget": 835}];
+
+function calculerBudget() {
+  const loyer = Number(document.getElementById('loyer').value || 0);
+  const apl = Number(document.getElementById('apl').value || 0);
+  const bourse = Number(document.getElementById('bourse').value || 0);
+  const alimentation = Number(document.getElementById('alimentation').value || 0);
+  const transport = Number(document.getElementById('transport').value || 0);
+  const telephone = Number(document.getElementById('telephone').value || 0);
+  const loisirs = Number(document.getElementById('loisirs').value || 0);
+  const assurance = Number(document.getElementById('assurance').value || 0);
+  const totalDepenses = loyer + alimentation + transport + telephone + loisirs + assurance;
+  const totalAides = apl + bourse;
+  const reste = Math.max(0, totalDepenses - totalAides);
+  document.getElementById('resultAmount').textContent = reste.toLocaleString('fr-FR') + ' €';
+  document.getElementById('resultText').textContent = 'Dépenses estimées : ' + totalDepenses.toLocaleString('fr-FR') + ' € - aides déclarées : ' + totalAides.toLocaleString('fr-FR') + ' €. Résultat indicatif.';
+}
+function appliquerVille() {
+  const select = document.getElementById('villeSelect');
+  const city = villes.find(v => v.name === select.value);
+  if (!city) return;
+  document.getElementById('loyer').value = city.rentLow;
+  document.getElementById('transport').value = city.transport;
+  calculerBudget();
+}
+function filtrerVilles() {
+  const q = document.getElementById('searchCity').value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+  const region = document.getElementById('regionFilter').value;
+  document.querySelectorAll('.city-card').forEach(card => {
+    const city = card.dataset.city.normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+    const okCity = city.includes(q);
+    const okRegion = !region || card.dataset.region === region;
+    card.style.display = okCity && okRegion ? '' : 'none';
+  });
+}
+document.querySelectorAll('#budgetForm input, #budgetForm select').forEach(el => el.addEventListener('input', calculerBudget));
+document.getElementById('villeSelect').addEventListener('change', appliquerVille);
+document.getElementById('searchCity').addEventListener('input', filtrerVilles);
+document.getElementById('regionFilter').addEventListener('change', filtrerVilles);
+calculerBudget();
+</script>
+
+
+</body>
+</html>
