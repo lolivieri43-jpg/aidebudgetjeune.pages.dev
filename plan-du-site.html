@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Plan du site AideBudgetJeunes - Toutes les pages</title>
+  <meta name="description" content="Plan du site AideBudgetJeunes avec tous les guides budget et toutes les pages de villes.">
+  <link rel="canonical" href="https://aidebudgetjeunes-pages-dev.pages.dev/plan-du-site.html">
+  <meta property="og:title" content="Plan du site AideBudgetJeunes - Toutes les pages">
+  <meta property="og:description" content="Plan du site AideBudgetJeunes avec tous les guides budget et toutes les pages de villes.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://aidebudgetjeunes-pages-dev.pages.dev/plan-du-site.html">
+  <meta name="theme-color" content="#2454e8">
+  <style>
+:root{
+  --bg:#f6f8fb; --card:#ffffff; --text:#152033; --muted:#5e6b7f; --line:#e4e9f2;
+  --primary:#2454e8; --primary-dark:#173ab2; --accent:#10b981; --warning:#f59e0b;
+  --shadow:0 18px 45px rgba(21,32,51,.10); --radius:22px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);line-height:1.55}
+a{color:inherit;text-decoration:none}
+.container{max-width:1120px;margin:0 auto;padding:0 20px}
+.topbar{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.9);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.nav{height:70px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:900;font-size:1.08rem}
+.logo-mark{width:36px;height:36px;border-radius:12px;background:linear-gradient(135deg,var(--primary),#7c3aed);display:grid;place-items:center;color:#fff}
+.nav-links{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.nav-links a{font-weight:700;color:#344054;padding:10px 12px;border-radius:12px}
+.nav-links a:hover{background:#eef3ff;color:var(--primary)}
+.hero{padding:72px 0 42px;background:radial-gradient(circle at top left,#dbeafe 0,rgba(219,234,254,0) 35%),radial-gradient(circle at top right,#dcfce7 0,rgba(220,252,231,0) 35%)}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:30px;align-items:center}
+.badge{display:inline-flex;align-items:center;gap:8px;background:#eef3ff;border:1px solid #dbe5ff;color:var(--primary);font-weight:800;border-radius:999px;padding:8px 12px;margin-bottom:16px}
+h1{font-size:clamp(2.05rem,5vw,4rem);line-height:1.03;margin:0 0 18px;letter-spacing:-.045em}
+.lead{font-size:1.18rem;color:var(--muted);max-width:720px;margin:0 0 26px}
+.cta-row{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;border:none;border-radius:15px;padding:13px 18px;font-weight:900;cursor:pointer;transition:.2s}
+.btn-primary{background:var(--primary);color:#fff;box-shadow:0 12px 24px rgba(36,84,232,.22)}
+.btn-primary:hover{background:var(--primary-dark);transform:translateY(-1px)}
+.btn-secondary{background:#fff;border:1px solid var(--line);color:#1f2937}
+.btn-secondary:hover{border-color:#bdd0ff;transform:translateY(-1px)}
+.hero-card,.card,.simulator,.city-card,.info-box{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+.hero-card{padding:22px}
+.metric{display:grid;grid-template-columns:1fr auto;gap:8px;padding:15px 0;border-bottom:1px solid var(--line)}
+.metric:last-child{border-bottom:0}
+.metric strong{font-size:1.4rem;color:var(--primary)}
+.section{padding:52px 0}
+.section-title{font-size:clamp(1.7rem,3vw,2.45rem);line-height:1.12;margin:0 0 12px;letter-spacing:-.035em}
+.section-subtitle{color:var(--muted);font-size:1.03rem;margin:0 0 26px}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.card{padding:22px}
+.card h3{margin:0 0 8px;font-size:1.16rem}
+.card p{margin:0;color:var(--muted)}
+.simulator{padding:24px}
+.form-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.field label{display:block;font-size:.84rem;font-weight:850;margin-bottom:6px;color:#344054}
+.field input,.field select{width:100%;border:1px solid var(--line);border-radius:13px;padding:12px 12px;font:inherit;background:#fff}
+.field input:focus,.field select:focus{outline:3px solid #dbeafe;border-color:#93b4ff}
+.result{margin-top:18px;border-radius:18px;background:#0f172a;color:#fff;padding:20px;display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center}
+.result .amount{font-size:2rem;font-weight:950}
+.result p{margin:4px 0 0;color:#cbd5e1}
+.tools{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:18px}
+.search{flex:1;min-width:240px;border:1px solid var(--line);border-radius:15px;padding:13px 14px;font:inherit;background:#fff}
+.select{border:1px solid var(--line);border-radius:15px;padding:13px 14px;font:inherit;background:#fff;min-width:230px}
+.city-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.city-card{padding:16px;transition:.18s}
+.city-card:hover{transform:translateY(-2px);border-color:#bcd0ff}
+.city-card .city{font-weight:950}
+.city-card .region{color:var(--muted);font-size:.88rem;margin-top:2px}
+.city-card .budget{margin-top:10px;color:var(--primary);font-weight:900}
+.ad-slot{border:2px dashed #cbd5e1;border-radius:18px;background:#fff;padding:18px;text-align:center;color:#64748b;font-weight:800}
+.info-box{padding:24px}
+.info-box ul{margin:10px 0 0;padding-left:22px;color:var(--muted)}
+.footer{background:#101828;color:#d0d5dd;margin-top:54px;padding:34px 0}
+.footer-grid{display:grid;grid-template-columns:1fr auto;gap:20px;align-items:center}
+.footer a{color:#fff;font-weight:700;margin-right:14px}
+.notice{font-size:.92rem;color:#667085}
+.breadcrumb{font-weight:800;color:var(--muted);font-size:.92rem;margin-bottom:18px}
+.breadcrumb a{color:var(--primary)}
+.table{width:100%;border-collapse:separate;border-spacing:0;border:1px solid var(--line);border-radius:18px;overflow:hidden;background:#fff}
+.table th,.table td{padding:14px;border-bottom:1px solid var(--line);text-align:left}
+.table tr:last-child td{border-bottom:0}
+.table th{background:#f8fafc;font-weight:950}
+.article{max-width:900px}
+.article h2{font-size:1.65rem;margin:34px 0 12px;letter-spacing:-.02em}
+.article p{color:#475467}
+.related{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:20px}
+@media(max-width:900px){.hero-grid,.grid-3,.footer-grid{grid-template-columns:1fr}.form-grid{grid-template-columns:repeat(2,1fr)}.city-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.nav{height:auto;padding:14px 0;align-items:flex-start}.nav-links{justify-content:flex-start}.form-grid,.city-grid,.related{grid-template-columns:1fr}.result{grid-template-columns:1fr}.hero{padding-top:38px}}
+
+.guide-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.guide-card{display:block;background:#fff;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;transition:.18s}
+.guide-card:hover{transform:translateY(-2px);border-color:#bcd0ff}
+.guide-card h3{margin:0 0 8px;font-size:1.12rem;color:var(--text)}
+.guide-card p{margin:0;color:var(--muted)}
+.article ul{color:#475467}.article li{margin:8px 0}.affiliate-note{font-size:.92rem;color:#64748b;background:#f8fafc;border:1px solid var(--line);padding:14px;border-radius:14px}.site-map-list{columns:3;column-gap:28px}.site-map-list li{break-inside:avoid;margin:7px 0}.pill-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}.pill{border:1px solid var(--line);background:#fff;border-radius:999px;padding:9px 12px;font-weight:800;color:#344054}
+@media(max-width:900px){.guide-grid{grid-template-columns:1fr 1fr}.site-map-list{columns:2}}
+@media(max-width:560px){.guide-grid{grid-template-columns:1fr}.site-map-list{columns:1}}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="container nav">
+    <a class="logo" href="index.html" aria-label="Accueil AideBudgetJeunes"><span class="logo-mark">€</span><span>AideBudgetJeunes</span></a>
+    <nav class="nav-links" aria-label="Navigation principale">
+      <a href="index.html#simulateur">Simulateur</a>
+      <a href="index.html#villes">Villes</a>
+      <a href="index.html#guides">Guides</a>
+      <a href="plan-du-site.html">Plan du site</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+<main>
+
+  <section class="hero">
+    <div class="container article">
+      <div class="breadcrumb"><a href="index.html">Accueil</a> / Plan du site</div>
+      <div class="badge">Plan du site • Liens internes</div>
+      <h1>Plan du site AideBudgetJeunes</h1>
+      <p class="lead">Toutes les pages importantes du site sont listées ici pour les visiteurs et pour faciliter l’exploration par les moteurs de recherche.</p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container article">
+      <h2>Pages principales</h2>
+      <ul>
+        <li><a href="index.html">Accueil et simulateur budget</a></li>
+        <li><a href="mentions-legales.html">Mentions légales</a></li>
+        <li><a href="confidentialite.html">Politique de confidentialité</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <h2>Guides budget</h2>
+      <ul>
+        <li><a href="budget-etudiant-sans-voiture.html">Budget étudiant sans voiture : combien prévoir par mois ?</a></li>
+        <li><a href="apl-et-bourse-etudiant.html">APL et bourse étudiant : comment les intégrer dans son budget ?</a></li>
+        <li><a href="budget-apprenti-cap.html">Budget apprenti en CAP : salaire, logement et dépenses mensuelles</a></li>
+        <li><a href="budget-bts.html">Budget étudiant en BTS : logement, transport et dépenses à prévoir</a></li>
+        <li><a href="comment-economiser-etudiant.html">Comment économiser quand on est étudiant : méthode simple et efficace</a></li>
+      </ul>
+      <h2>Budgets étudiants par ville</h2>
+      <ul class="site-map-list">
+        <li><a href="villes/budget-etudiant-paris.html">Budget étudiant à Paris — Île-de-France </a></li>
+        <li><a href="villes/budget-etudiant-lyon.html">Budget étudiant à Lyon — Auvergne-Rhône-Alpes </a></li>
+        <li><a href="villes/budget-etudiant-marseille.html">Budget étudiant à Marseille — Provence-Alpes-Côte d’Azur </a></li>
+        <li><a href="villes/budget-etudiant-toulouse.html">Budget étudiant à Toulouse — Occitanie </a></li>
+        <li><a href="villes/budget-etudiant-bordeaux.html">Budget étudiant à Bordeaux — Nouvelle-Aquitaine </a></li>
+        <li><a href="villes/budget-etudiant-lille.html">Budget étudiant à Lille — Hauts-de-France </a></li>
+        <li><a href="villes/budget-etudiant-nantes.html">Budget étudiant à Nantes — Pays de la Loire </a></li>
+        <li><a href="villes/budget-etudiant-rennes.html">Budget étudiant à Rennes — Bretagne </a></li>
+        <li><a href="villes/budget-etudiant-grenoble.html">Budget étudiant à Grenoble — Auvergne-Rhône-Alpes </a></li>
+        <li><a href="villes/budget-etudiant-montpellier.html">Budget étudiant à Montpellier — Occitanie </a></li>
+        <li><a href="villes/budget-etudiant-nice.html">Budget étudiant à Nice — Provence-Alpes-Côte d’Azur </a></li>
+        <li><a href="villes/budget-etudiant-strasbourg.html">Budget étudiant à Strasbourg — Grand Est </a></li>
+        <li><a href="villes/budget-etudiant-dijon.html">Budget étudiant à Dijon — Bourgogne-Franche-Comté </a></li>
+        <li><a href="villes/budget-etudiant-besancon.html">Budget étudiant à Besançon — Bourgogne-Franche-Comté </a></li>
+        <li><a href="villes/budget-etudiant-clermont-ferrand.html">Budget étudiant à Clermont-Ferrand — Auvergne-Rhône-Alpes </a></li>
+        <li><a href="villes/budget-etudiant-saint-etienne.html">Budget étudiant à Saint-Étienne — Auvergne-Rhône-Alpes </a></li>
+        <li><a href="villes/budget-etudiant-angers.html">Budget étudiant à Angers — Pays de la Loire </a></li>
+        <li><a href="villes/budget-etudiant-tours.html">Budget étudiant à Tours — Centre-Val de Loire </a></li>
+        <li><a href="villes/budget-etudiant-orleans.html">Budget étudiant à Orléans — Centre-Val de Loire </a></li>
+        <li><a href="villes/budget-etudiant-caen.html">Budget étudiant à Caen — Normandie </a></li>
+        <li><a href="villes/budget-etudiant-rouen.html">Budget étudiant à Rouen — Normandie </a></li>
+        <li><a href="villes/budget-etudiant-le-havre.html">Budget étudiant à Le Havre — Normandie </a></li>
+        <li><a href="villes/budget-etudiant-amiens.html">Budget étudiant à Amiens — Hauts-de-France </a></li>
+        <li><a href="villes/budget-etudiant-reims.html">Budget étudiant à Reims — Grand Est </a></li>
+        <li><a href="villes/budget-etudiant-metz.html">Budget étudiant à Metz — Grand Est </a></li>
+        <li><a href="villes/budget-etudiant-nancy.html">Budget étudiant à Nancy — Grand Est </a></li>
+        <li><a href="villes/budget-etudiant-mulhouse.html">Budget étudiant à Mulhouse — Grand Est </a></li>
+        <li><a href="villes/budget-etudiant-brest.html">Budget étudiant à Brest — Bretagne </a></li>
+        <li><a href="villes/budget-etudiant-lorient.html">Budget étudiant à Lorient — Bretagne </a></li>
+        <li><a href="villes/budget-etudiant-vannes.html">Budget étudiant à Vannes — Bretagne </a></li>
+        <li><a href="villes/budget-etudiant-poitiers.html">Budget étudiant à Poitiers — Nouvelle-Aquitaine </a></li>
+        <li><a href="villes/budget-etudiant-limoges.html">Budget étudiant à Limoges — Nouvelle-Aquitaine </a></li>
+        <li><a href="villes/budget-etudiant-la-rochelle.html">Budget étudiant à La Rochelle — Nouvelle-Aquitaine </a></li>
+        <li><a href="villes/budget-etudiant-pau.html">Budget étudiant à Pau — Nouvelle-Aquitaine </a></li>
+        <li><a href="villes/budget-etudiant-bayonne.html">Budget étudiant à Bayonne — Nouvelle-Aquitaine </a></li>
+        <li><a href="villes/budget-etudiant-perpignan.html">Budget étudiant à Perpignan — Occitanie </a></li>
+        <li><a href="villes/budget-etudiant-nimes.html">Budget étudiant à Nîmes — Occitanie </a></li>
+        <li><a href="villes/budget-etudiant-avignon.html">Budget étudiant à Avignon — Provence-Alpes-Côte d’Azur </a></li>
+        <li><a href="villes/budget-etudiant-aix-en-provence.html">Budget étudiant à Aix-en-Provence — Provence-Alpes-Côte d’Azur </a></li>
+        <li><a href="villes/budget-etudiant-toulon.html">Budget étudiant à Toulon — Provence-Alpes-Côte d’Azur </a></li>
+        <li><a href="villes/budget-etudiant-annecy.html">Budget étudiant à Annecy — Auvergne-Rhône-Alpes </a></li>
+        <li><a href="villes/budget-etudiant-chambery.html">Budget étudiant à Chambéry — Auvergne-Rhône-Alpes </a></li>
+        <li><a href="villes/budget-etudiant-bourg-en-bresse.html">Budget étudiant à Bourg-en-Bresse — Auvergne-Rhône-Alpes </a></li>
+        <li><a href="villes/budget-etudiant-amberieu-en-bugey.html">Budget étudiant à Ambérieu-en-Bugey — Auvergne-Rhône-Alpes </a></li>
+        <li><a href="villes/budget-etudiant-lagnieu.html">Budget étudiant à Lagnieu — Auvergne-Rhône-Alpes </a></li>
+        <li><a href="villes/budget-etudiant-saint-vulbas.html">Budget étudiant à Saint-Vulbas — Auvergne-Rhône-Alpes </a></li>
+        <li><a href="villes/budget-etudiant-bourgoin-jallieu.html">Budget étudiant à Bourgoin-Jallieu — Auvergne-Rhône-Alpes </a></li>
+        <li><a href="villes/budget-etudiant-villeurbanne.html">Budget étudiant à Villeurbanne — Auvergne-Rhône-Alpes </a></li>
+        <li><a href="villes/budget-etudiant-bron.html">Budget étudiant à Bron — Auvergne-Rhône-Alpes </a></li>
+        <li><a href="villes/budget-etudiant-villefranche-sur-saone.html">Budget étudiant à Villefranche-sur-Saône — Auvergne-Rhône-Alpes </a></li>
+        <li><a href="villes/budget-etudiant-macon.html">Budget étudiant à Mâcon — Bourgogne-Franche-Comté </a></li>
+        <li><a href="villes/budget-etudiant-chalon-sur-saone.html">Budget étudiant à Chalon-sur-Saône — Bourgogne-Franche-Comté </a></li>
+        <li><a href="villes/budget-etudiant-auxerre.html">Budget étudiant à Auxerre — Bourgogne-Franche-Comté </a></li>
+        <li><a href="villes/budget-etudiant-troyes.html">Budget étudiant à Troyes — Grand Est </a></li>
+        <li><a href="villes/budget-etudiant-roanne.html">Budget étudiant à Roanne — Auvergne-Rhône-Alpes </a></li>
+        <li><a href="villes/budget-etudiant-valence.html">Budget étudiant à Valence — Auvergne-Rhône-Alpes </a></li>
+        <li><a href="villes/budget-etudiant-montelimar.html">Budget étudiant à Montélimar — Auvergne-Rhône-Alpes </a></li>
+        <li><a href="villes/budget-etudiant-romans-sur-isere.html">Budget étudiant à Romans-sur-Isère — Auvergne-Rhône-Alpes </a></li>
+        <li><a href="villes/budget-etudiant-gap.html">Budget étudiant à Gap — Provence-Alpes-Côte d’Azur </a></li>
+        <li><a href="villes/budget-etudiant-thonon-les-bains.html">Budget étudiant à Thonon-les-Bains — Auvergne-Rhône-Alpes </a></li>
+        <li><a href="villes/budget-etudiant-annemasse.html">Budget étudiant à Annemasse — Auvergne-Rhône-Alpes </a></li>
+        <li><a href="villes/budget-etudiant-beziers.html">Budget étudiant à Béziers — Occitanie </a></li>
+      </ul>
+      <div class="ad-slot" style="margin:28px 0">Emplacement publicité — à activer après validation Google AdSense</div>
+    </div>
+  </section>
+
+</main>
+<footer class="footer">
+  <div class="container footer-grid">
+    <div>
+      <strong>AideBudgetJeunes</strong>
+      <div class="notice">Estimations indicatives. Les aides officielles doivent être vérifiées auprès de la CAF, du CROUS ou de l’établissement concerné.</div>
+    </div>
+    <div>
+      <a href="mentions-legales.html">Mentions légales</a>
+      <a href="confidentialite.html">Confidentialité</a>
+      <a href="plan-du-site.html">Plan du site</a>
+      <a href="budget-etudiant-sans-voiture.html">Guides</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

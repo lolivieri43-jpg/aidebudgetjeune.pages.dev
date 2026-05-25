@@ -1,24 +1,23 @@
-# AideBudgetJeunes - site final
+# AideBudgetJeunes — version SEO renforcée
 
-Domaine prévu : https://aidebudgetjeunes-pages-dev.pages.dev/
+Site statique prêt pour Cloudflare Pages.
 
-## Déploiement Cloudflare Pages
-Build settings :
+Déploiement Cloudflare Pages :
 - Framework preset : None
 - Build command : laisser vide
 - Build output directory : /
-- Root directory : laisser vide si `index.html` est à la racine
+- Root directory : laisser vide
 
-## Fichiers importants
-- `index.html`
-- `sitemap.xml`
-- `robots.txt`
-- `mentions-legales.html`
-- `confidentialite.html`
-- `contact.html`
-- `villes/`
+Fichiers importants :
+- index.html
+- sitemap.xml
+- robots.txt
+- plan-du-site.html
+- dossier villes/
+- 5 pages guides SEO
 
-Après déploiement, tester :
+Après upload, tester :
 - https://aidebudgetjeunes-pages-dev.pages.dev/
 - https://aidebudgetjeunes-pages-dev.pages.dev/sitemap.xml
 - https://aidebudgetjeunes-pages-dev.pages.dev/robots.txt
+- https://aidebudgetjeunes-pages-dev.pages.dev/plan-du-site.html

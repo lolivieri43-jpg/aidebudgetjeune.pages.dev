@@ -1,0 +1,3 @@
+Liens internes vérifiés : aucun lien cassé détecté
+Nombre de pages HTML : 73
+Nombre de pages dans sitemap : 72
